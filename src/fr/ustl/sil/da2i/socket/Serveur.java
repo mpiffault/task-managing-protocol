@@ -42,6 +42,7 @@ public class Serveur {
 	    }
 		
 	    realiseService(unClient);
+	    System.out.println("Fin realiseService()"); // DEBUG
 	}
     }
 
@@ -58,8 +59,10 @@ public class Serveur {
 		    reception = new BufferedReader(new InputStreamReader(unClient.getInputStream()));
 	
 		    String requete = reception.readLine();
-
-		    envoi.println(traiterRequete(requete));
+		    if (requete != null)
+			envoi.println(traiterRequete(requete));
+		    else
+			return;
 		} catch (IOException e) {
 		    e.printStackTrace();
 		    System.exit(1);
@@ -68,8 +71,6 @@ public class Serveur {
     }
 
     private String traiterRequete(String requete){
-	if (requete == null)
-	    return null;
 
 	if(requete.equals("CREATE"))
 	    return "Création d'une tâche.";
