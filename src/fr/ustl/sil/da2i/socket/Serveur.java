@@ -40,55 +40,58 @@ public class Serveur {
 		e.printStackTrace();
 		System.exit(1);
 	    }
-		
-	    realiseService(unClient);
+
+	    Connexion c = new Connexion(unClient);
+	    c.start();
+
+	    //	    realiseService(unClient);
 	    System.out.println("Fin realiseService()"); // DEBUG
 	}
     }
 
     
-    private void realiseService(Socket unClient) {
-	PrintWriter envoi = null;
-	BufferedReader reception = null;
-	while (! unClient.isClosed())
-	    {
-		try {
-	
-		    envoi = new PrintWriter(unClient.getOutputStream(), true);
-			
-		    reception = new BufferedReader(new InputStreamReader(unClient.getInputStream()));
-	
-		    String requete = reception.readLine();
-		    if (requete != null)
-			envoi.println(traiterRequete(requete));
-		    else
-			return;
-		} catch (IOException e) {
-		    e.printStackTrace();
-		    System.exit(1);
-		}
-	    }
-    }
+    // private void realiseService(Socket unClient) {
+    // 	PrintWriter envoi = null;
+    // 	BufferedReader reception = null;
 
-    private String traiterRequete(String requete){
+    // 	envoi = new PrintWriter(unClient.getOutputStream(), true);
+    // 	reception = new BufferedReader(new InputStreamReader(unClient.getInputStream()));
+    // 	while (! unClient.isClosed())
+    // 	    {
+    // 		try {
+    // 		    String requete = reception.readLine();
 
-	if(requete.equals("CREATE"))
-	    return "Création d'une tâche.";
+    // 		    if (requete != null)
+    // 			envoi.println(traiterRequete(requete));
+    // 		    else // Connection closed
+    // 			return;
+    // 		} catch (IOException e) {
+    // 		    e.printStackTrace();
+    // 		    envoi.close();
+    // 		    reception.close();
+    // 		}
+    // 	    }
+    // }
 
-	else if (requete.equals("STAT"))
-	    return "Liste des tâches.";
+    // private String traiterRequete(String requete){
 
-	else if(requete.equals("AFF"))
-	    return "Affectaion d'une tâche.";
+    // 	if(requete.equals("CREATE"))
+    // 	    return "Création d'une tâche.";
 
-	else if(requete.equals("CHSTAT"))
-	    return "Changement du status d'une tâche.";
+    // 	else if (requete.equals("STAT"))
+    // 	    return "Liste des tâches.";
 
-	else if(requete.equals("DEL"))
-	    return "Suppression d'une tâche.";
+    // 	else if(requete.equals("AFF"))
+    // 	    return "Affectaion d'une tâche.";
 
-	else
-	    return "Bad Request";
+    // 	else if(requete.equals("CHSTAT"))
+    // 	    return "Changement du status d'une tâche.";
 
-    }
+    // 	else if(requete.equals("DEL"))
+    // 	    return "Suppression d'une tâche.";
+
+    // 	else
+    // 	    return "Bad Request";
+
+    // }
 }
