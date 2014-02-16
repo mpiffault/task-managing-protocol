@@ -29,6 +29,7 @@ public class Serveur {
     /** Mise en attente de la Socket dans une boucle.
      * Bloquant.
      */
+    // TODO: Thread
     public void miseEnService() {
 	Socket unClient = null;
 		
@@ -52,11 +53,9 @@ public class Serveur {
 	
 	    envoi = new PrintWriter(unClient.getOutputStream(), true);
 			
-	    reception = new BufferedReader(
-					   new InputStreamReader(unClient.getInputStream()));
+	    reception = new BufferedReader(new InputStreamReader(unClient.getInputStream()));
 	
 	    String requete = reception.readLine();
-
 
 	    envoi.println(traiterRequete(requete));
 	} catch (IOException e) {
@@ -66,6 +65,18 @@ public class Serveur {
     }
 
     private String traiterRequete(String requete){
-	return null;
+	if (requete.equals("STAT"))
+	    {
+
+	    }
+	else if(requete.equals(""))
+	    {
+
+	    }
+    }
+
+    private String listerTaches()
+    {
+	ListIterator<Tache> l = taches.listIterator();
     }
 }

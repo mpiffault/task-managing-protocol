@@ -7,13 +7,13 @@ public class Tache {
     private int idTache;
     private String auteur;
     private String intitule;
-    private String personne;
+    private String affectation;
     private boolean effectuee;
 
     public Tache()
     {
 	this.idTache = ++cptIds;
-	this.personne = null;
+	this.affectation = null;
     }
 
     public Tache(String auteur, String intitule)
@@ -24,11 +24,19 @@ public class Tache {
 	this.effectuee = false;
     }
 
-    public boolean affecter(String personne)
+    public String toString()
+    {
+	return idTache+","
+	    + intitule+","
+	    + (estAffectee() ? affectation : "Non affectée")+","
+	    + auteur;
+    }
+
+    public boolean affecter(String affectation)
     {
 	if (! estAffectee())
 	    {
-		this.personne = personne;
+		this.affectation = affectation;
 		return true;
 	    }
 	return false;
@@ -36,7 +44,7 @@ public class Tache {
 
     public boolean estAffectee()
     {
-	return personne != null;
+	return affectation != null;
     }
 
     public void cloturer()
@@ -64,14 +72,24 @@ public class Tache {
 	return intitule;
     }
 
-    public void setPersonne(String personne)
+    public void setAffectation(String affectation)
     {
-	this.personne = personne;
+	this.affectation = affectation;
     }
 
-    public String getPersonne()
+    public String getAffectation()
     {
-	return personne;
+	return affectation;
     }
+    
 
+    public static void main (String [] args)
+    {
+	Tache t1 = new Tache("Corriger les bugs", "Martin");
+	Tache t2 = new Tache("Ajouter la super fonctionnalité", "Joe");
+	t2.affecter("Joe la Mouk");
+
+	System.out.println(t1);
+	System.out.println(t2);
+    }
 }
