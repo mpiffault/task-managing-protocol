@@ -49,34 +49,45 @@ public class Serveur {
     private void realiseService(Socket unClient) {
 	PrintWriter envoi = null;
 	BufferedReader reception = null;
-	try {
+	while (! unClient.isClosed())
+	    {
+		try {
 	
-	    envoi = new PrintWriter(unClient.getOutputStream(), true);
+		    envoi = new PrintWriter(unClient.getOutputStream(), true);
 			
-	    reception = new BufferedReader(new InputStreamReader(unClient.getInputStream()));
+		    reception = new BufferedReader(new InputStreamReader(unClient.getInputStream()));
 	
-	    String requete = reception.readLine();
+		    String requete = reception.readLine();
 
-	    envoi.println(traiterRequete(requete));
-	} catch (IOException e) {
-	    e.printStackTrace();
-	    System.exit(1);
-	}
+		    envoi.println(traiterRequete(requete));
+		} catch (IOException e) {
+		    e.printStackTrace();
+		    System.exit(1);
+		}
+	    }
     }
 
     private String traiterRequete(String requete){
-	if (requete.equals("STAT"))
-	    {
+	if (requete == null)
+	    return null;
 
-	    }
-	else if(requete.equals(""))
-	    {
+	if(requete.equals("CREATE"))
+	    return "Création d'une tâche.";
 
-	    }
-    }
+	else if (requete.equals("STAT"))
+	    return "Liste des tâches.";
 
-    private String listerTaches()
-    {
-	ListIterator<Tache> l = taches.listIterator();
+	else if(requete.equals("AFF"))
+	    return "Affectaion d'une tâche.";
+
+	else if(requete.equals("CHSTAT"))
+	    return "Changement du status d'une tâche.";
+
+	else if(requete.equals("DEL"))
+	    return "Suppression d'une tâche.";
+
+	else
+	    return "Bad Request";
+
     }
 }
