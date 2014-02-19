@@ -29,7 +29,6 @@ public class Serveur {
     /** Mise en attente de la Socket dans une boucle.
      * Bloquant.
      */
-    // TODO: Thread
     public void miseEnService() {
 	Socket unClient = null;
 		
@@ -44,54 +43,7 @@ public class Serveur {
 	    Connexion c = new Connexion(unClient);
 	    c.start();
 
-	    //	    realiseService(unClient);
 	    System.out.println("Fin realiseService()"); // DEBUG
 	}
     }
-
-    
-    // private void realiseService(Socket unClient) {
-    // 	PrintWriter envoi = null;
-    // 	BufferedReader reception = null;
-
-    // 	envoi = new PrintWriter(unClient.getOutputStream(), true);
-    // 	reception = new BufferedReader(new InputStreamReader(unClient.getInputStream()));
-    // 	while (! unClient.isClosed())
-    // 	    {
-    // 		try {
-    // 		    String requete = reception.readLine();
-
-    // 		    if (requete != null)
-    // 			envoi.println(traiterRequete(requete));
-    // 		    else // Connection closed
-    // 			return;
-    // 		} catch (IOException e) {
-    // 		    e.printStackTrace();
-    // 		    envoi.close();
-    // 		    reception.close();
-    // 		}
-    // 	    }
-    // }
-
-    // private String traiterRequete(String requete){
-
-    // 	if(requete.equals("CREATE"))
-    // 	    return "Création d'une tâche.";
-
-    // 	else if (requete.equals("STAT"))
-    // 	    return "Liste des tâches.";
-
-    // 	else if(requete.equals("AFF"))
-    // 	    return "Affectaion d'une tâche.";
-
-    // 	else if(requete.equals("CHSTAT"))
-    // 	    return "Changement du status d'une tâche.";
-
-    // 	else if(requete.equals("DEL"))
-    // 	    return "Suppression d'une tâche.";
-
-    // 	else
-    // 	    return "Bad Request";
-
-    // }
 }

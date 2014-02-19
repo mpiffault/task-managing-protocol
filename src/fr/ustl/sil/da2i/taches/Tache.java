@@ -5,7 +5,7 @@ public class Tache {
     public static int cptIds;
 
     private int idTache;
-    private String auteur;
+    private String createur;
     private String intitule;
     private String affectation;
     private boolean effectuee;
@@ -16,10 +16,10 @@ public class Tache {
 	this.affectation = null;
     }
 
-    public Tache(String auteur, String intitule)
+    public Tache(String createur, String intitule)
     {
 	this();
-	this.auteur = auteur;
+	this.createur = createur;
 	this.intitule = intitule;
 	this.effectuee = false;
     }
@@ -29,7 +29,7 @@ public class Tache {
 	return idTache+","
 	    + intitule+","
 	    + (estAffectee() ? affectation : "Non affectée")+","
-	    + auteur;
+	    + createur;
     }
 
     public boolean affecter(String affectation)
@@ -52,14 +52,14 @@ public class Tache {
 	this.effectuee = true;;
     }
 
-    public void setAuteur(String auteur)
+    public void setCreateur(String createur)
     {
-	this.auteur = auteur;
+	this.createur = createur;
     }
 
-    public String getAuteur()
+    public String getCreateur()
     {
-	return auteur;
+	return createur;
     }
 
     public void setIntitule(String intitule)

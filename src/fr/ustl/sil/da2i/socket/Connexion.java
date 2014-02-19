@@ -14,6 +14,7 @@ import java.util.regex.*;
 public class Connexion extends Thread {
     
     private static String erreur = "ERR Bad Request.";
+    
     Socket client;
 
     Connexion(Socket client)
@@ -66,22 +67,24 @@ public class Connexion extends Thread {
 		if(commande.equals("CREATE"))
 		    {
 			sc = new Scanner(requete);
-			//if (sc.findInLine("CREATE ([^:]*):([^:]*)") != null)
+
 			if (sc.findInLine("CREATE \"([^\"]*)\"\\s*(.*)") != null)
 			    {
 				m = sc.match();
 				String intitule = m.group(1);
 				String createur = m.group(2);
+				ListeDeTaches.ajouterTache(createur, intitule);
 				return "OK Création de la tâche \"" + intitule + "\" par " + createur;
 			    }
 			else
 			    return ("Bad CREATE request !");
 		    }
+
 		// LIST
 		// Doit retourner la listes des tâches existantes
 		else if (commande.equals("LIST"))
 		    {
-			return "OK Liste des tâches.";
+			return ListeDeTaches.getListe().toString();
 		    }
 
 		// AFF num_tache

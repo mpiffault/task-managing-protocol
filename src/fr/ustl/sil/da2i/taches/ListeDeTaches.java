@@ -5,31 +5,43 @@ import java.util.List;
 import fr.ustl.sil.da2i.taches.*;
 
 public class ListeDeTaches {
-    private ArrayList<Tache> taches = null;
+    private static ArrayList<Tache> listeTaches = null;
+
+    private static ListeDeTaches t = new ListeDeTaches();
 
     /** Construit une liste de taches vides.
      */
     public ListeDeTaches()
     {
-	this.taches = new ArrayList<Tache>();
+	this.listeTaches = new ArrayList<Tache>();
     }
 
     /** Construit une nouvelle liste de taches
      * à partir de la liste passée en paramètre.
      */
-    public ListeDeTaches(List<Tache> taches)
+    public ListeDeTaches(List<Tache> listeTaches)
     {
-	this.taches = (ArrayList<Tache>) taches;
+	this.listeTaches = (ArrayList<Tache>) listeTaches;
     }
 
     public String toString()
     {
 	String res = "Id,Intitulé,Affectation,Auteur\n";
-	for (Tache t : taches)
+	for (Tache t : listeTaches)
 	    {
 		res += t + "\n";
 	    }
 	return res;
+    }
+
+    public static ListeDeTaches getListe()
+    {
+	return t;
+    }
+
+    public static void ajouterTache(String createur, String intitule)
+    {
+	listeTaches.add(new Tache(createur, intitule));
     }
 
     public static void main (String args[])

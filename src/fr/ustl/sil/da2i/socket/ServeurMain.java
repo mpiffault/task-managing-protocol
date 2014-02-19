@@ -1,4 +1,4 @@
-Xpackage fr.ustl.sil.da2i.socket;
+package fr.ustl.sil.da2i.socket;
 
 public class ServeurMain {
 
