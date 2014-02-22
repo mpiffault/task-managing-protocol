@@ -7,26 +7,36 @@ Prototype de d'un protocole de gestion de tâches inspiré du Post Office Protoc
 
 Commandes client-serveur:
 
-# LIST
+    LIST
 
     Retourne la liste des tâches
 
-# CREATE <N° Tache> <Créateur>
+---
+
+    CREATE <N° Tache> <Créateur>
 
     Créé une nouvelle tâche
+    
+---
 	
-# DEL <N° Tache>
+    DEL <N° Tache>
 
     Supprime une tache
+    
+---
 
-# AFF <N° Tache> <Agent>
+    AFF <N° Tache> <Agent>
 
     Affecte une tâche à un agent
+    
+---
 
-# CHSTAT <N° Tache> <(LIB|CLOSE)>
+    CHSTAT <N° Tache> <(LIB|CLOSE)>
 
     Change l'état d'une tâche (Libre, Terminée)
+    
+---
 
-# QUIT
+    QUIT
 
     Déconnecte le client
