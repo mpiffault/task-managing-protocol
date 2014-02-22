@@ -1,4 +1,4 @@
-package fr.ustl.sil.da2i.socket;
+package client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class Client {
 
 	public Client() {
 		try {
-			clientSocket = new Socket("localhost",8599);
+			clientSocket = new Socket("localhost", 8599);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -23,25 +23,40 @@ public class Client {
 			System.exit(1);
 		}
 
-	    try {
+		try {
 			envoi = new PrintWriter(clientSocket.getOutputStream(), true);
-			reception = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			reception = new BufferedReader(new InputStreamReader(
+					clientSocket.getInputStream()));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 	}
-	
+
+	/**
+	 * Envoi la commande passée en paramètre au serveur.
+	 * 
+	 * @param message
+	 * @return
+	 */
 	public String envoyer(String message) {
-		    envoi.println(message);
-		    
-		    try {
-				return reception.readLine();
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.exit(1);
+		envoi.println(message);
+		String ret = "";
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			while (reception.ready()) {
+				ret += reception.readLine() + "\n";
 			}
-		    return null;
+			return ret;
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+		return null;
 	}
 
 }
